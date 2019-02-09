@@ -14,13 +14,19 @@ LIRI will search for
 
 <img src="images/concert-this.png" alt="Concert Image" width="700px">
 
+<br><br>
+
 <b> Favorite Song Search <br> <br> 
 
 <img src="images/spotify-this.png" alt="Spotify Image" width="700px">
- 
+
+<br><br>
+
 <b> Favorite Movie Search <br> <br>
 
 <img src="images/movie-this.png" alt="Movie Image" width="700px">
+
+<br><br>
 
 <b> Favorite Do It Search <br> <br>
   
