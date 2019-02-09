@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 // -- Grabbing the axios Package -- \\
 var axios = require("axios");
@@ -13,9 +12,13 @@ var request = require("request");
 // -- Setting the third word into action -- \\
 var action = process.argv[2];
 // console.log(process.argv[2]);
+// -- Color package to set colors -- \\
+var colors = require('colors');
 
 // -- Setting the fourth word into inputs -- \\
 var inputs = process.argv.slice(3).join("+");
+
+var err = colors.red;
 
 // -- This allows for node to go back and forth between specific function base don the command case -- \\
 switch (action) {
@@ -29,7 +32,7 @@ switch (action) {
     break;
 
   case "movie-this":
-    movie(inputs);
+    movie(action, inputs);
     break;
 
   case "do-what-it-says":
@@ -49,7 +52,6 @@ function spotify(inputs) {
     if (err) {
       return console.log('Error occurred: ' + err);
     } else {
-      // console.log(data.tracks.items);
       
         var info = data.tracks.items[0];
         var artist = info.artists[0].name;
@@ -57,7 +59,7 @@ function spotify(inputs) {
         var preview = info.preview_url;
         var album = info.album.name;
 
-        console.log("You Searched for | " + inputs + " | Searching Now...");
+        console.log("You Searched for | ".rainbow + inputs.underline.red + " | Searching Now...".rainbow);
         console.log(`\n\nArtist: ${artist}\nSong: ${song}\nAlbum: ${album}\nSpotify preview: ${preview}\n`);
       
     };
@@ -80,10 +82,9 @@ function concert(inputs) {
         var venue = response.data[i].venue.name;
         var location = response.data[i].venue.city;
         var date = response.data[i].datetime;
-        console.log("You Searched for | " + inputs + " | Searching Now...");
+        console.log("You Searched for | ".rainbow + inputs.underline.red + " | Searching Now...".rainbow);
         console.log(`::::::::::::::::::\n\nVenue: ${venue}\nLocation: ${location}\nDate: ${date}\n`);
       }
-
 
 
     }).catch(function (error) {
@@ -102,7 +103,7 @@ function movie(action, inputs) {
     .then(function (response) {
 
       // console.log(response.data);
-      console.log("You Searched for | " + inputs + " | Searching Now...");
+      console.log("You Searched for | ".rainbow + inputs.underline.red + " | Searching Now...".rainbow);
       console.log("Title: " + response.data.Title);
       console.log("Year: " + response.data.Year);
       console.log("IMDB Rating: " + response.data.imdbRating);
