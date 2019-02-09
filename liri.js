@@ -14,7 +14,7 @@ var action = process.argv[2];
 // console.log(process.argv[2]);
 
 // ----------- Grabs User's Inputs from Command Line --------------- \\ 
-var inputs = process.argv[3];
+var inputs = process.argv.slice(3).join("+");
 
 
 switch (action) {
@@ -41,29 +41,30 @@ switch (action) {
 
 function spotify(inputs) {
 
-  var spotify = new Spotify(keys.spotifyKeys);
-  if (!inputs) {
-    inputs = '';
+  var spotify = new Spotify(keys.spotify);
 
-  }
+  this.song = inputs;
 
-  spotify.search({ type: 'track', query: inputs }, function (err, data) {
+  spotify.search({ type: 'track', query: this.song, limit: 1 }, function (err, data) {
     if (err) {
-      console.log('Error occurred: ' + err);
-      return;
-    }
-    console.log("You Searched for | " + process.argv[3] + " | Searching Now...");
+      return console.log('Error occurred: ' + err);
+    } else {
+      // console.log(data.tracks.items);
+      
+        var info = data.tracks.items[0];
+        var artist = info.artists[0].name;
+        var song = info.name;
+        var preview = info.preview_url;
+        var album = info.album.name;
 
-    var songInfo = data.tracks.items;
-    console.log("Artist's : " + songInfo[0].artists[0].name);
-    console.log("Song Name : " + songInfo[0].name);
-    console.log("Preview Link : " + songInfo[0].preview_url);
-    console.log("Album: " + songInfo[0].album.name);
+        console.log("You Searched for | " + inputs + " | Searching Now...");
+        console.log(`\n\nArtist: ${artist}\nSong: ${song}\nAlbum: ${album}\nSpotify preview: ${preview}\n`);
+      
+    };
 
   });
 
-
-}
+};
 
 // ------------------ IMDB Movie Function ----------------------- \\
 
@@ -72,49 +73,50 @@ function concert(inputs) {
 
   axios.get("https://rest.bandsintown.com/artists/" + inputs + "/events?app_id=codingbootcamp")
 
-  .then(function(response) {
+    .then(function (response) {
 
       // console.log(response.data);
       for (var i = 0; i < response.data.length; i++) {
-            var venue = response.data[i].venue.name;
-            var location = response.data[i].venue.city;
-            var date = response.data[i].datetime;
-
-            console.log(`::::::::::::::::::\n\nVenue: ${venue}\nLocation: ${location}\nDate: ${date}\n`);
+        var venue = response.data[i].venue.name;
+        var location = response.data[i].venue.city;
+        var date = response.data[i].datetime;
+        console.log("You Searched for | " + inputs + " | Searching Now...");
+        console.log(`::::::::::::::::::\n\nVenue: ${venue}\nLocation: ${location}\nDate: ${date}\n`);
       }
-      
 
 
-  }).catch(function(error) {
 
-    return console.log(error)
-    
-  });
+    }).catch(function (error) {
+
+      return console.log(error)
+
+    });
 };
 
 // ------------------ Concert Function -----------------------  \\
 
 function movie(action, inputs) {
-  
+
   axios.get("http://www.omdbapi.com/?t=" + inputs + "&y=&plot=short&apikey=bbcdfc4f")
 
-    .then(function(response) {
+    .then(function (response) {
 
-        // console.log(response.data);
-        console.log("Title: " + response.data.Title);
-        console.log("Year: " + response.data.Year);
-        console.log("IMDB Rating: " + response.data.imdbRating);
-        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[0].Value);
-        console.log("Country: " + response.data.Country);
-        console.log("Language: " + response.data.Language);
-        console.log("Plot: " + response.data.Plot);
-        console.log("Actors: " + response.data.Actors);
+      // console.log(response.data);
+      console.log("You Searched for | " + inputs + " | Searching Now...");
+      console.log("Title: " + response.data.Title);
+      console.log("Year: " + response.data.Year);
+      console.log("IMDB Rating: " + response.data.imdbRating);
+      console.log("Rotten Tomatoes Rating: " + response.data.Ratings[0].Value);
+      console.log("Country: " + response.data.Country);
+      console.log("Language: " + response.data.Language);
+      console.log("Plot: " + response.data.Plot);
+      console.log("Actors: " + response.data.Actors);
 
 
-    }).catch(function(error) {
+    }).catch(function (error) {
 
       return console.log(error)
-      
+
     });
 };
 
@@ -123,25 +125,28 @@ function movie(action, inputs) {
 // ------------------ This Function will read the file of random.txt and test out any commands -----------------------  \\
 
 function doit(action, inputs) {
-	fs.readFile('random.txt', "utf8", function(error, data, body){
+  fs.readFile('random.txt', "utf8", function (error, data, body) {
 
-		if (error) {
-    		return console.log(error);
-  		}
+    if (error) {
+      return console.log(error);
+    }
 
-		// Then split it by commas (to make it more readable)
+    // Then split it by commas (to make it more readable)
     var dataArr = data.split(",");
     console.log(dataArr);
-    
-    
+
+
     action = dataArr[0];
     inputs = dataArr[1];
-    
+
     movie(action, inputs);
 
-		
-    });
-    return;
+
+  });
+  return;
 
 };
 
+
+// 1) Question One : Spotify error " Error occurred : TypeERror: Cannot read property '0' of undefined "
+// 2) Question Two : The Movie function isn't working because of the first parameter = "action". If I take action out for the movie function, the todo function doesn't work. 
