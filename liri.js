@@ -67,49 +67,55 @@ function spotify(inputs) {
 
 // ------------------ IMDB Movie Function ----------------------- \\
 
+
 function concert(inputs) {
 
-  var queryUrl = "https://rest.bandsintown.com/artists/" + inputs + "/events?app_id=codingbootcamp";
+  axios.get("https://rest.bandsintown.com/artists/" + inputs + "/events?app_id=codingbootcamp")
 
-	request(queryUrl, function(error, response, body) {
-		if (!inputs){
-        	inputs = '';
-    	}
-		if (!error && response.statusCode === 200) {
-        // console.log(response);
-		    console.log("Venue Name: " + JSON.parse(body).venue);
-		    // console.log("Country: " + JSON.parse(body).country);
-		    // console.log("Venue Name: " + JSON.parse(body).region);
-		    // console.log("Venue Name: " + JSON.parse(body).city);
-		    // console.log("Venue Name: " + JSON.parse(body).datetime);
-		}
-	});
+  .then(function(response) {
+
+      // console.log(response.data);
+      for (var i = 0; i < response.data.length; i++) {
+            var venue = response.data[i].venue.name;
+            var location = response.data[i].venue.city;
+            var date = response.data[i].datetime;
+
+            console.log(`::::::::::::::::::\n\nVenue: ${venue}\nLocation: ${location}\nDate: ${date}\n`);
+      }
+      
+
+
+  }).catch(function(error) {
+
+    return console.log(error)
+    
+  });
 };
 
 // ------------------ Concert Function -----------------------  \\
 
-function movie(inputs) {
-
-  var queryUrl = "http://www.omdbapi.com/?t=" + inputs + "&y=&plot=short&apikey=bbcdfc4f";
+function movie(action, inputs) {
   
+  axios.get("http://www.omdbapi.com/?t=" + inputs + "&y=&plot=short&apikey=bbcdfc4f")
 
-	request(queryUrl, function(error, response, body) {
-		if (!inputs){
-        	inputs = '';
-    	}
-		if (!error && response.statusCode === 200) {
-        // // console.log(response);
-        console.log("You Searched for | " + inputs + " | Searching Now...");
-		    console.log("Title: " + JSON.parse(body).Title);
-		    console.log("Release Year: " + JSON.parse(body).Year);
-		    console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-		    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[0].Value);
-		    console.log("Country: " + JSON.parse(body).Country);
-		    console.log("Language: " + JSON.parse(body).Language);
-		    console.log("Plot: " + JSON.parse(body).Plot);
-		    console.log("Actors: " + JSON.parse(body).Actors);
-		}
-	});
+    .then(function(response) {
+
+        // console.log(response.data);
+        console.log("Title: " + response.data.Title);
+        console.log("Year: " + response.data.Year);
+        console.log("IMDB Rating: " + response.data.imdbRating);
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[0].Value);
+        console.log("Country: " + response.data.Country);
+        console.log("Language: " + response.data.Language);
+        console.log("Plot: " + response.data.Plot);
+        console.log("Actors: " + response.data.Actors);
+
+
+    }).catch(function(error) {
+
+      return console.log(error)
+      
+    });
 };
 
 
@@ -127,9 +133,11 @@ function doit(action, inputs) {
     var dataArr = data.split(",");
     console.log(dataArr);
     
+    
     action = dataArr[0];
     inputs = dataArr[1];
-    console.log("Title: " + JSON.parse(body).Title);
+    
+    movie(action, inputs);
 
 		
     });
