@@ -9,7 +9,7 @@ LIRI will search for
 3) OMDB for movies
 4) Do what it says 
 
-This is an example on how to look up your Favorite Artist's concerts.
+<b> This is an example on how to look up your Favorite Artist's concerts.
 <img src="https://media.giphy.com/media/9u4PAtVkBHgLCe7uWU/giphy.gif" alt="Concert Gif">
 
 
