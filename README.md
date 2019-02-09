@@ -9,18 +9,21 @@ LIRI will search for
 3) OMDB for movies
 4) Do what it says 
 <br><br><br>
-<b>  Favorite Artist's Concert Search <br><br>
+<b>Favorite Artist's Concert Search <br><br>
 
 <img src="images/concert-this.png" alt="Concert Gif" width="700px">
 
-
-
 <b> Favorite Song Search <br> <br> 
-  
+
+<img src="images/concert-this.png" alt="Concert Gif" width="700px">
  
 <b> Favorite Movie Search <br> <br>
-  
+
+<img src="images/concert-this.png" alt="Concert Gif" width="700px">
+
 <b> 
+  
+<img src="images/concert-this.png" alt="Concert Gif" width="700px">
 
 
 
