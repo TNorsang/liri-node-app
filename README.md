@@ -9,8 +9,8 @@ LIRI will search for
 3) OMDB for movies
 4) Do what it says 
 
+<img src="https://gph.is/2WV0Y35" alt="Concert Gif" height="42" width="42">
 
-https://gph.is/2WV0Y35
 
 
 
