@@ -9,8 +9,8 @@ LIRI will search for
 3) OMDB for movies
 4) Do what it says 
 <br><br><br><br><br>
-<b> Favourite Artist's Concert Search <br><br>
-<img src="https://media.giphy.com/media/9u4PAtVkBHgLCe7uWU/giphy.gif" alt="Concert Gif" style="border: line;">
+<b style="text-align: center;">  Favourite Artist's Concert Search <br><br>
+<img src="https://media.giphy.com/media/9u4PAtVkBHgLCe7uWU/giphy.gif" alt="Concert Gif">
 
 
 
