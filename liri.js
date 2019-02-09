@@ -1,22 +1,23 @@
+
 require("dotenv").config();
-
+// -- Grabbing the axios Package -- \\
 var axios = require("axios");
-
+// -- Linking the keys.js -- \\
 var keys = require("./keys.js");
-
+// -- Grabbing spotify api -- \\
 var Spotify = require('node-spotify-api');
-
+// -- FS is a way to read/write files -- \\
 var fs = require("fs");
-
+// -- Grabbing the request package -- \\
 var request = require("request");
-
+// -- Setting the third word into action -- \\
 var action = process.argv[2];
 // console.log(process.argv[2]);
 
-// ----------- Grabs User's Inputs from Command Line --------------- \\ 
+// -- Setting the fourth word into inputs -- \\
 var inputs = process.argv.slice(3).join("+");
 
-
+// -- This allows for node to go back and forth between specific function base don the command case -- \\
 switch (action) {
 
   case "concert-this":
@@ -40,12 +41,11 @@ switch (action) {
 // ------------------ Spotify Function -----------------------  \\
 
 function spotify(inputs) {
-
+  // -- Constructer-- \\
   var spotify = new Spotify(keys.spotify);
 
-  this.song = inputs;
-
-  spotify.search({ type: 'track', query: this.song, limit: 1 }, function (err, data) {
+  // -- Search documentation -- \\
+  spotify.search({ type: 'track', query: inputs, limit: 1 }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     } else {
@@ -70,7 +70,7 @@ function spotify(inputs) {
 
 
 function concert(inputs) {
-
+  // --- Grabbing the data via Axios --- \\
   axios.get("https://rest.bandsintown.com/artists/" + inputs + "/events?app_id=codingbootcamp")
 
     .then(function (response) {
