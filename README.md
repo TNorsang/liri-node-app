@@ -11,9 +11,9 @@ LIRI will search for
 <br><br><br>
 <b>  Favorite Artist's Concert Search <br><br>
 
-<img src="images/concert-this.png" alt="Concert Gif" width="100px">
+<img src="images/concert-this.png" alt="Concert Gif" width="700px">
 
-<img src="https://media.giphy.com/media/9u4PAtVkBHgLCe7uWU/giphy.gif" alt="Concert Gif" width="700px">
+
 
 <b> Favorite Song Search <br> <br> 
   
